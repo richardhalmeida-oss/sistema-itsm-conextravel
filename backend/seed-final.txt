@@ -1,0 +1,137 @@
+﻿
+> itsm-backend@1.0.0 seed
+> ts-node -r tsconfig-paths/register src/infrastructure/database/seeds/run-seed.ts
+
+npm : (node:9304) 
+DeprecationWarning: Calling 
+client.query() when the 
+client is already executing a 
+query is deprecated and will 
+be removed in pg@9.0. Use 
+async/await or an external 
+async flow control mechanism 
+instead.
+No linha:1 caractere:1
++ npm run seed 2>&1 | 
+Out-File -FilePath 
+seed-final.txt -Encoding utf8
++ ~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : 
+    NotSpecified: ((node:930  
+  4) Dep...hanism instead.:   
+ String) [], RemoteExcepti    
+on
+    + FullyQualifiedErrorId : 
+    NativeCommandError
+ 
+(Use `node 
+--trace-deprecation ...` to 
+show where the warning was 
+created)
+­ƒôè Database connected. Running seed...
+Ô£à 32 permissions created
+Ô£à 4 roles created
+ÔØî Seed failed: 
+QueryFailedError: inser├º├úo 
+ou atualiza├º├úo em tabela 
+"role_permissions" viola 
+restri├º├úo de chave 
+estrangeira "FK_178199805b901c
+cd220ab7740ec"
+    at 
+PostgresQueryRunner.query (C:\
+Users\User\Desktop\sistema_com
+pleto_TI\backend\node_modules\
+typeorm\src\driver\postgres\Po
+stgresQueryRunner.ts:325:19)
+    at 
+processTicksAndRejections (nod
+e:internal/process/task_queues
+:95:5)
+    at async runSeed (C:\Users
+\User\Desktop\sistema_completo
+_TI\backend\src\infrastructure
+\database\seeds\run-seed.ts:85
+:7) {
+  query: 'INSERT INTO 
+role_permissions (role_id, 
+permission_id) VALUES ($1, 
+$2) ON CONFLICT DO NOTHING',
+  parameters: [
+    'd721c84d-ea1e-4b91-a299-8
+5f6a49944c8',
+    'fd3b504c-9cc3-4636-a8d0-8
+b247690b1b8'
+  ],
+  driverError: error: 
+inser├º├úo ou atualiza├º├úo 
+em tabela "role_permissions" 
+viola restri├º├úo de chave 
+estrangeira "FK_178199805b901c
+cd220ab7740ec"
+      at C:\Users\User\Desktop
+\sistema_completo_TI\backend\n
+ode_modules\pg\lib\client.js:6
+31:17
+      at 
+processTicksAndRejections (nod
+e:internal/process/task_queues
+:95:5)
+      at async 
+PostgresQueryRunner.query (C:\
+Users\User\Desktop\sistema_com
+pleto_TI\backend\node_modules\
+typeorm\src\driver\postgres\Po
+stgresQueryRunner.ts:254:25)
+      at async runSeed (C:\Use
+rs\User\Desktop\sistema_comple
+to_TI\backend\src\infrastructu
+re\database\seeds\run-seed.ts:
+85:7) {
+    length: 349,
+    severity: 'ERRO',
+    code: '23503',
+    detail: 'Chave (role_id)=(
+d721c84d-ea1e-4b91-a299-85f6a4
+9944c8) n├úo est├í presente 
+na tabela "roles".',
+    hint: undefined,
+    position: undefined,
+    internalPosition: 
+undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: 'public',
+    table: 'role_permissions',
+    column: undefined,
+    dataType: undefined,
+    constraint: 'FK_178199805b
+901ccd220ab7740ec',
+    file: 'ri_triggers.c',
+    line: '2783',
+    routine: 
+'ri_ReportViolation'
+  },
+  length: 349,
+  severity: 'ERRO',
+  code: '23503',
+  detail: 'Chave (role_id)=(d7
+21c84d-ea1e-4b91-a299-85f6a499
+44c8) n├úo est├í presente na 
+tabela "roles".',
+  hint: undefined,
+  position: undefined,
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: 'public',
+  table: 'role_permissions',
+  column: undefined,
+  dataType: undefined,
+  constraint: 'FK_178199805b90
+1ccd220ab7740ec',
+  file: 'ri_triggers.c',
+  line: '2783',
+  routine: 
+'ri_ReportViolation'
+}

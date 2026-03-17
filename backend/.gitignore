@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Compilation
+dist/
+artifacts/
+
+# Testing
+coverage/
+
+# Environment
+.env
+.env.test
+
+# Logs
+logs/
+*.log
+
+# Misc
+.DS_Store
+.vscode/
+.idea/

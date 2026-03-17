@@ -1,0 +1,66 @@
+﻿
+> itsm-backend@1.0.0 seed
+> ts-node -r tsconfig-paths/register src/infrastructure/database/seeds/run-seed.ts
+
+npm : 
+DataTypeNotSupportedError: 
+Data type "Object" in "UserOrm
+Entity.refreshTokenHash" is 
+not supported by "postgres" 
+database.
+No linha:1 caractere:1
++ npm run seed 2>&1 | 
+Out-File -FilePath 
+seed-log.txt -Encoding utf8
++ ~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : 
+    NotSpecified: (DataTypeN  
+  otSupp...gres" database.:   
+ String) [], RemoteExcepti    
+on
+    + FullyQualifiedErrorId : 
+    NativeCommandError
+ 
+    at C:\Users\User\Desktop\s
+istema_completo_TI\backend\nod
+e_modules\src\metadata-builder
+\EntityMetadataValidator.ts:13
+3:31
+    at Array.forEach 
+(<anonymous>)
+    at EntityMetadataValidator
+.validate (C:\Users\User\Deskt
+op\sistema_completo_TI\backend
+\node_modules\src\metadata-bui
+lder\EntityMetadataValidator.t
+s:128:18)
+    at C:\Users\User\Desktop\s
+istema_completo_TI\backend\nod
+e_modules\src\metadata-builder
+\EntityMetadataValidator.ts:43
+:18
+    at Array.forEach 
+(<anonymous>)
+    at EntityMetadataValidator
+.validateMany (C:\Users\User\D
+esktop\sistema_completo_TI\bac
+kend\node_modules\src\metadata
+-builder\EntityMetadataValidat
+or.ts:42:25)
+    at 
+DataSource.buildMetadatas (C:\
+Users\User\Desktop\sistema_com
+pleto_TI\backend\node_modules\
+src\data-source\DataSource.ts:
+753:33)
+    at async 
+DataSource.initialize (C:\User
+s\User\Desktop\sistema_complet
+o_TI\backend\node_modules\src\
+data-source\DataSource.ts:264:
+13)
+    at async runSeed (C:\Users
+\User\Desktop\sistema_completo
+_TI\backend\src\infrastructure
+\database\seeds\run-seed.ts:24
+:3)
