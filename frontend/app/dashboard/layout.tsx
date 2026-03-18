@@ -44,7 +44,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
 
   if (loading || !user) {
     return (
-      <div className="loading-spinner" style={{ minHeight: '100vh', background: 'var(--bg-app)' }}>
+      <div className="loading-spinner" style={{ minHeight: '100vh', background: 'var(--bg-primary)' }}>
         <div className="spinner" />
       </div>
     );
