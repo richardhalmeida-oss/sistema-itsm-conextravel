@@ -21,9 +21,8 @@ async function bootstrap(): Promise<void> {
   app.use(compression());
 
   // CORS
-  const corsOrigins = configService.get<string>('CORS_ORIGINS', 'http://localhost:3001');
   app.enableCors({
-    origin: corsOrigins.split(','),
+    origin: true, // Auto-reflects request origin, fixes strict browser blocks
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
   });
@@ -84,7 +83,7 @@ async function bootstrap(): Promise<void> {
   app.enableShutdownHooks();
 
   const port = configService.get<number>('PORT', 3000);
-  await app.listen(port);
+  await app.listen(port, '0.0.0.0');
 
   logger.log(`🚀 ITSM Platform API running on: http://localhost:${port}/${apiPrefix}`);
   logger.log(`📚 Swagger docs: http://localhost:${port}/docs`);
