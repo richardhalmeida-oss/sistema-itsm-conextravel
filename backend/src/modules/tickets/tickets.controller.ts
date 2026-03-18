@@ -92,7 +92,6 @@ export class TicketsController {
   }
 
   @Post()
-  @RequirePermissions('tickets:create')
   @ApiOperation({ summary: 'Create ticket' })
   async create(
     @Body() body: {
