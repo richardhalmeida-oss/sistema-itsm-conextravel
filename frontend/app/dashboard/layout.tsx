@@ -79,13 +79,10 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
             src="/logo.png" 
             alt="Conextravel" 
             style={{ 
-              height: 24, 
+              height: 32, 
               filter: theme === 'dark' ? 'brightness(0) invert(1)' : 'none' 
             }} 
           />
-          <div>
-            <h1 style={{ fontSize: 13, background: 'none', color: 'var(--text-primary)', WebkitTextFillColor: 'initial', fontWeight: 800 }}>CONEXTRAVEL TI</h1>
-          </div>
         </div>
 
         <nav className="sidebar-nav">

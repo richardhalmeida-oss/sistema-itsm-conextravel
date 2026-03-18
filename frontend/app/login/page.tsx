@@ -36,10 +36,9 @@ export default function LoginPage() {
     <div className="login-page">
       <div className="login-bg" />
       <div className="login-card">
-        <div className="login-logo">
-          <img src="/logo.png" alt="Conextravel" style={{ height: 64, marginBottom: 8, filter: 'brightness(0) invert(1)' }} />
-          <h1>CONEXTRAVEL TI</h1>
-          <p>Gestão Inteligente de Chamados</p>
+        <div className="login-logo" style={{ marginBottom: 24 }}>
+          <img src="/logo.png" alt="Conextravel" style={{ height: 48, filter: 'brightness(0) invert(1)' }} />
+          <p style={{ marginTop: 12 }}>Gestão Inteligente de Chamados</p>
         </div>
 
         {error && <div className="login-error">{error}</div>}
