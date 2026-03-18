@@ -1,6 +1,8 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { dashboardApi, ticketsApi, slaApi } from '@/lib/api';
+import { useAuth } from '@/lib/auth-context';
+import { useRouter } from 'next/navigation';
 
 const statusLabels: Record<string, string> = {
   open: 'Abertos',
@@ -52,12 +54,18 @@ interface DashboardStats {
 }
 
 export default function DashboardPage() {
+  const { user } = useAuth();
+  const router = useRouter();
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (user && !user.roles.some((r: string) => ['admin', 'supervisor', 'technician'].includes(r))) {
+      router.replace('/dashboard/tickets/my');
+      return;
+    }
     loadStats();
-  }, []);
+  }, [user, router]);
 
   async function loadStats() {
     try {

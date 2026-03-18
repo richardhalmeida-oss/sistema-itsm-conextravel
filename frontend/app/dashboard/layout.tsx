@@ -5,7 +5,7 @@ import { useAuth } from '@/lib/auth-context';
 import Link from 'next/link';
 
 const navItems = [
-  { label: 'Dashboard', href: '/dashboard', roles: ['admin', 'supervisor', 'technician', 'user'] },
+  { label: 'Dashboard', href: '/dashboard', roles: ['admin', 'supervisor', 'technician'] },
   { label: 'Chamados', href: '/dashboard/tickets', roles: ['admin', 'supervisor', 'technician'] },
   { label: 'Meus Chamados', href: '/dashboard/tickets/my', roles: ['admin', 'supervisor', 'technician', 'user'] },
 ];
