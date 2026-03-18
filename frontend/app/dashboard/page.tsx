@@ -109,24 +109,24 @@ export default function DashboardPage() {
       {/* Main Stats Grid */}
       <div className="stats-grid">
         <div className="stat-card">
-          <div className="stat-card-icon" style={{ background: 'rgba(99, 102, 241, 0.15)', color: '#818cf8' }}>
-            🎫
+          <div className="stat-card-icon" style={{ height: 44, width: 44, borderRadius: 10, background: 'rgba(99, 102, 241, 0.15)', color: '#818cf8', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
+            <div style={{ width: 16, height: 16, border: '2px solid currentColor', borderRadius: 4 }}></div>
           </div>
           <div className="stat-card-value">{stats.tickets.total}</div>
           <div className="stat-card-label">Total de Chamados</div>
         </div>
 
         <div className="stat-card">
-          <div className="stat-card-icon" style={{ background: 'rgba(59, 130, 246, 0.15)', color: '#60a5fa' }}>
-            📂
+          <div className="stat-card-icon" style={{ height: 44, width: 44, borderRadius: 10, background: 'rgba(59, 130, 246, 0.15)', color: '#60a5fa', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
+            <div style={{ width: 16, height: 16, borderBottom: '2px solid currentColor', borderLeft: '2px solid currentColor' }}></div>
           </div>
           <div className="stat-card-value">{stats.tickets.openCount}</div>
           <div className="stat-card-label">Chamados Abertos</div>
         </div>
 
         <div className="stat-card">
-          <div className="stat-card-icon" style={{ background: 'rgba(34, 197, 94, 0.15)', color: '#4ade80' }}>
-            ✅
+          <div className="stat-card-icon" style={{ height: 44, width: 44, borderRadius: 10, background: 'rgba(34, 197, 94, 0.15)', color: '#4ade80', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
+            <div style={{ width: 16, height: 8, borderBottom: '2px solid currentColor', borderLeft: '2px solid currentColor', transform: 'rotate(-45deg)', marginBottom: 4 }}></div>
           </div>
           <div className="stat-card-value">{stats.tickets.resolvedToday}</div>
           <div className="stat-card-label">Resolvidos Hoje</div>
@@ -136,11 +136,12 @@ export default function DashboardPage() {
           <div
             className="stat-card-icon"
             style={{
+              height: 44, width: 44, borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16,
               background: stats.sla.complianceRate >= 90 ? 'rgba(34, 197, 94, 0.15)' : 'rgba(239, 68, 68, 0.15)',
               color: stats.sla.complianceRate >= 90 ? '#4ade80' : '#f87171',
             }}
           >
-            ⏱️
+            <div style={{ width: 16, height: 16, border: '2px solid currentColor', borderRadius: '50%' }}></div>
           </div>
           <div className="stat-card-value">{stats.sla.complianceRate}%</div>
           <div className="stat-card-label">Compliance SLA</div>
@@ -185,7 +186,7 @@ export default function DashboardPage() {
             ))}
             {Object.keys(stats.tickets.byStatus).length === 0 && (
               <div className="empty-state">
-                <div className="empty-state-icon">📊</div>
+                <div className="empty-state-icon" style={{ fontSize: 32, fontWeight: 800, opacity: 0.1 }}>---</div>
                 <p className="empty-state-text">Nenhum dado disponível</p>
                 <p className="empty-state-sub">Crie chamados para ver as estatísticas</p>
               </div>
@@ -216,7 +217,7 @@ export default function DashboardPage() {
             ))}
             {Object.keys(stats.tickets.byPriority).length === 0 && (
               <div className="empty-state">
-                <div className="empty-state-icon">📈</div>
+                <div className="empty-state-icon" style={{ fontSize: 32, fontWeight: 800, opacity: 0.1 }}>---</div>
                 <p className="empty-state-text">Nenhum dado disponível</p>
               </div>
             )}

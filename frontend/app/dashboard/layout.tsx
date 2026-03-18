@@ -5,20 +5,20 @@ import { useAuth } from '@/lib/auth-context';
 import Link from 'next/link';
 
 const navItems = [
-  { label: 'Dashboard', href: '/dashboard', icon: '📊', roles: ['admin', 'supervisor', 'technician', 'user'] },
-  { label: 'Chamados', href: '/dashboard/tickets', icon: '🎫', roles: ['admin', 'supervisor', 'technician'] },
-  { label: 'Meus Chamados', href: '/dashboard/tickets/my', icon: '📋', roles: ['admin', 'supervisor', 'technician', 'user'] },
+  { label: 'Dashboard', href: '/dashboard', roles: ['admin', 'supervisor', 'technician', 'user'] },
+  { label: 'Chamados', href: '/dashboard/tickets', roles: ['admin', 'supervisor', 'technician'] },
+  { label: 'Meus Chamados', href: '/dashboard/tickets/my', roles: ['admin', 'supervisor', 'technician', 'user'] },
 ];
 
 const adminItems = [
-  { label: 'Usuários', href: '/dashboard/users', icon: '👥' },
-  { label: 'SLA', href: '/dashboard/sla', icon: '⏱️' },
-  { label: 'Automação', href: '/dashboard/automation', icon: '⚡' },
-  { label: 'Auditoria', href: '/dashboard/audit', icon: '📝' },
+  { label: 'Usuários', href: '/dashboard/users' },
+  { label: 'SLA', href: '/dashboard/sla' },
+  { label: 'Automação', href: '/dashboard/automation' },
+  { label: 'Auditoria', href: '/dashboard/audit' },
 ];
 
 const systemItems = [
-  { label: 'Notificações', href: '/dashboard/notifications', icon: '🔔' },
+  { label: 'Notificações', href: '/dashboard/notifications' },
 ];
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
@@ -26,6 +26,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
 
   useEffect(() => {
     if (!loading && !user) {
@@ -33,9 +34,17 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
     }
   }, [user, loading, router]);
 
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  };
+
   if (loading || !user) {
     return (
-      <div className="loading-spinner" style={{ minHeight: '100vh' }}>
+      <div className="loading-spinner" style={{ minHeight: '100vh', background: 'var(--bg-app)' }}>
         <div className="spinner" />
       </div>
     );
@@ -43,13 +52,13 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
 
   const initials = user.name
     .split(' ')
+    .slice(0, 2)
     .map((n) => n[0])
     .join('')
-    .toUpperCase()
-    .slice(0, 2);
+    .toUpperCase();
 
   return (
-    <div className="app-layout">
+    <div className="app-layout fade-in">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
@@ -66,10 +75,16 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
       {/* Sidebar */}
       <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
         <div className="sidebar-logo">
-          <img src="/logo.png" alt="Conextravel" style={{ height: 28, filter: 'brightness(0) invert(1)' }} />
+          <img 
+            src="/logo.png" 
+            alt="Conextravel" 
+            style={{ 
+              height: 24, 
+              filter: theme === 'dark' ? 'brightness(0) invert(1)' : 'none' 
+            }} 
+          />
           <div>
-            <h1>CONEXTRAVEL</h1>
-            <span>TI - Service Desk</span>
+            <h1 style={{ fontSize: 13, background: 'none', color: 'var(--text-primary)', WebkitTextFillColor: 'initial', fontWeight: 800 }}>CONEXTRAVEL TI</h1>
           </div>
         </div>
 
@@ -82,7 +97,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
               className={`nav-item ${pathname === item.href ? 'active' : ''}`}
               onClick={() => setSidebarOpen(false)}
             >
-              <span className="nav-item-icon">{item.icon}</span>
+              <div className="nav-dot"></div>
               {item.label}
             </Link>
           ))}
@@ -97,7 +112,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   className={`nav-item ${pathname === item.href ? 'active' : ''}`}
                   onClick={() => setSidebarOpen(false)}
                 >
-                  <span className="nav-item-icon">{item.icon}</span>
+                  <div className="nav-dot"></div>
                   {item.label}
                 </Link>
               ))}
@@ -112,7 +127,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
               className={`nav-item ${pathname === item.href ? 'active' : ''}`}
               onClick={() => setSidebarOpen(false)}
             >
-              <span className="nav-item-icon">{item.icon}</span>
+              <div className="nav-dot"></div>
               {item.label}
             </Link>
           ))}
@@ -132,42 +147,68 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
               border: 'none',
               color: 'var(--text-muted)',
               cursor: 'pointer',
-              fontSize: 18,
               padding: 4,
+              fontSize: 13,
+              fontWeight: 600
             }}
           >
-            🚪
+            Sair
           </button>
         </div>
       </aside>
 
-      {/* Main */}
+      {/* Main Content Area */}
       <main className="main-content">
-        <header className="header">
+        <header className="header" style={{ display: 'flex', justifyContent: 'space-between' }}>
           <div className="header-left">
             <button
               className="header-btn"
               onClick={() => setSidebarOpen(!sidebarOpen)}
               style={{ display: 'none' }} // hidden on desktop
             >
-              ☰
+              |||
             </button>
             <span className="header-title" suppressHydrationWarning>
               {navItems.find((i) => i.href === pathname)?.label ||
                 adminItems.find((i) => i.href === pathname)?.label ||
                 systemItems.find((i) => i.href === pathname)?.label ||
-                'ITSM'}
+                'CONEXTRAVEL TI'}
             </span>
           </div>
+
           <div className="header-right">
-            <Link href="/dashboard/notifications" className="header-btn">
-              🔔
+            <button 
+              onClick={toggleTheme} 
+              className="header-btn"
+              title="Trocar Tema"
+              style={{ padding: '0 12px', fontSize: 12, fontWeight: 600, width: 'auto' }}
+            >
+              {theme === 'dark' ? 'CLARO' : 'ESCURO'}
+            </button>
+            <Link href="/dashboard/notifications" className="header-btn" title="Notificações" style={{ width: '40px' }}>
+              <div style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--status-progress)' }}></div>
             </Link>
           </div>
         </header>
 
-        <div className="page-content">{children}</div>
+        <div className="page-content slide-up">
+          {children}
+        </div>
       </main>
+
+      <style jsx>{`
+        .nav-dot {
+          width: 8px;
+          height: 8px;
+          background: currentColor;
+          border-radius: 50%;
+          opacity: 0.5;
+          margin: 0 4px;
+        }
+        .nav-item.active .nav-dot {
+          opacity: 1;
+        }
+      `}</style>
     </div>
   );
 }

@@ -1117,3 +1117,55 @@ body {
     grid-template-columns: 1fr;
   }
 }
+ 
+ 
+
+/* LIGHT MODE OVERRIDES */
+[data-theme='light'] {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f1f5f9;
+  --bg-glass: rgba(0, 0, 0, 0.03);
+  --bg-input: #f1f5f9;
+
+  --border-primary: #e2e8f0;
+  --border-accent: rgba(99, 102, 241, 0.2);
+
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+
+  --accent-primary: #4f46e5;
+  --accent-primary-hover: #4338ca;
+}
+
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.card {
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+}
+.card:hover {
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+}
+
+/* ANIMATIONS */
+.fade-in { animation: fadeIn 0.4s ease-out; }
+.slide-up { animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* CORPORATE UI TWEAKS */
+.sidebar-logo img {
+  transition: filter 0.3s ease;
+}
+.header-btn {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 0 12px;
+}
