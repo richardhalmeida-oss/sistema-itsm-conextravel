@@ -66,7 +66,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
       {/* Sidebar */}
       <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
         <div className="sidebar-logo">
-          <img src="/logo.png" alt="Conextravel" style={{ height: 36 }} />
+          <img src="/logo.png" alt="Conextravel" style={{ height: 28, filter: 'brightness(0) invert(1)' }} />
           <div>
             <h1>CONEXTRAVEL</h1>
             <span>TI - Service Desk</span>
