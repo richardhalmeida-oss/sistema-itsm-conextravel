@@ -141,20 +141,20 @@ async function runSeed(): Promise<void> {
     // 4. CREATE ADMIN USER
     // ============================================
     const adminUserId = uuidv4();
-    const adminPasswordHash = await bcrypt.hash('D26m06002003@', 12);
+    const adminPasswordHash = await bcrypt.hash(process.env.SEED_ADMIN_PASSWORD || 'Admin@123', 12);
 
     await queryRunner.query(
       `INSERT INTO users (id, email, name, password_hash, status, failed_login_attempts, created_at, updated_at)
-       VALUES ($1, $2, $3, $4, $5, $6, NOW(), NOW())
+       VALUES ($1, $2, $3, $4, 'active', 0, NOW(), NOW())
        ON CONFLICT (email) DO NOTHING`,
-      [adminUserId, 'tecnologia@conextravel.com.br', 'RICHARD - TI', adminPasswordHash, 'active', 0],
+      [adminUserId, process.env.SEED_ADMIN_EMAIL || 'admin@itsm.com', 'RICHARD - TI', adminPasswordHash],
     );
 
     await queryRunner.query(
       `INSERT INTO user_roles (user_id, role_id) VALUES ($1, $2) ON CONFLICT DO NOTHING`,
       [adminUserId, adminRoleId],
     );
-    console.log('✅ Admin user created: tecnologia@conextravel.com.br');
+    console.log(`✅ Admin user created: ${process.env.SEED_ADMIN_EMAIL || 'admin@itsm.com'}`);
 
     // ============================================
     // 5. CREATE DEFAULT SLA CONFIG
