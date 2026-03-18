@@ -37,7 +37,7 @@ export default function LoginPage() {
       <div className="login-bg" />
       <div className="login-card">
         <div className="login-logo">
-          <div className="login-logo-icon">🏫</div>
+          <img src="/logo.png" alt="Conextravel" style={{ height: 64, marginBottom: 8 }} />
           <h1>CONEXTRAVEL TI</h1>
           <p>Gestão Inteligente de Chamados</p>
         </div>
