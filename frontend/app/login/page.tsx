@@ -37,8 +37,8 @@ export default function LoginPage() {
       <div className="login-bg" />
       <div className="login-card">
         <div className="login-logo">
-          <div className="login-logo-icon">🎫</div>
-          <h1>ITSM Platform</h1>
+          <div className="login-logo-icon">🏫</div>
+          <h1>CONEXTRAVEL TI</h1>
           <p>Gestão Inteligente de Chamados</p>
         </div>
 

@@ -66,10 +66,10 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
       {/* Sidebar */}
       <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
         <div className="sidebar-logo">
-          <div className="sidebar-logo-icon">🎫</div>
+          <div className="sidebar-logo-icon">🏫</div>
           <div>
-            <h1>ITSM</h1>
-            <span>Service Desk</span>
+            <h1>CONEXTRAVEL</h1>
+            <span>TI - Service Desk</span>
           </div>
         </div>
 

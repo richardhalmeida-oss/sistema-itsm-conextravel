@@ -3,8 +3,8 @@ import './globals.css';
 import { AuthProvider } from '@/lib/auth-context';
 
 export const metadata: Metadata = {
-  title: 'ITSM Platform - Gestão de Chamados',
-  description: 'Plataforma completa de gestão de chamados ITSM - Service Desk',
+  title: 'CONEXTRAVEL TI - Gestão de Chamados',
+  description: 'Plataforma completa de gestão de chamados - CONEXTRAVEL TI Service Desk',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
