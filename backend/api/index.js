@@ -19,7 +19,7 @@ async function bootstrap() {
     );
     
     nestApp.enableCors({
-      origin: '*', // Permit all initially
+      origin: true, // Dynamically reflect the request origin (fixes Vercel CORS)
       methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
       credentials: true,
     });
