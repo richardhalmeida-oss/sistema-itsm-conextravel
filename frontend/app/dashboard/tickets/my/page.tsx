@@ -165,6 +165,9 @@ export default function MyTicketsPage() {
                   </select>
                 </div>
               </div>
+              <div style={{ marginTop: 8, padding: '8px 12px', background: 'var(--bg-input)', borderRadius: 6, fontSize: 13, color: 'var(--text-secondary)' }}>
+                ⏱️ <strong>Tempo estimado de resolução (SLA):</strong> {createForm.priority === 'critical' ? '2 horas' : createForm.priority === 'high' ? '4 horas' : createForm.priority === 'medium' ? '8 horas' : '24 horas'}
+              </div>
             </div>
             <div className="modal-footer">
               <button className="btn btn-secondary" onClick={() => setShowCreate(false)}>Cancelar</button>
