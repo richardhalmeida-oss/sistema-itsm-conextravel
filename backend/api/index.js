@@ -24,7 +24,9 @@ async function bootstrap() {
       credentials: true,
     });
     
-    nestApp.setGlobalPrefix(process.env.API_PREFIX || 'api/v1');
+    // Vercel Serverless environment strips '/api' from the incoming request path if the file is inside the 'api/' directory
+    // So the request url becomes '/v1/auth/login' instead of '/api/v1/auth/login'
+    nestApp.setGlobalPrefix('v1');
     nestApp.useGlobalPipes(new ValidationPipe({ transform: true, whitelist: true }));
     
     await nestApp.init();
