@@ -1,4 +1,4 @@
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://192.168.0.181:3000/api/v1';
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://192.168.0.183:3000/api/v1';
 
 interface RequestOptions {
   method?: string;
