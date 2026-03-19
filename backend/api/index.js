@@ -12,17 +12,25 @@ let cachedServer;
 async function bootstrap() {
   if (!cachedServer) {
     const expressApp = express();
+    
+    // Manually handle CORS at the Express level to be 100% sure Vercel sees the headers
+    expressApp.use((req, res, next) => {
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE,OPTIONS');
+      res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization');
+      
+      if (req.method === 'OPTIONS') {
+        res.status(200).end();
+        return;
+      }
+      next();
+    });
+
     const nestApp = await NestFactory.create(
       AppModule,
       new ExpressAdapter(expressApp),
-      { logger: ['error', 'warn'] } // Minimize logging in serverless to save execution time
+      { logger: ['error', 'warn'] } 
     );
-    
-    nestApp.enableCors({
-      origin: '*', // Liberar acesso TOTAL agora
-      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-      allowedHeaders: '*', // Aceitar qualquer cabeçalho
-    });
     
     // Ensure Nest correctly identifies routes whether they come with the /api prefix or not
     nestApp.setGlobalPrefix('api/v1');
