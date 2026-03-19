@@ -30,10 +30,10 @@ export default function TicketDetailPage({ params }: { params: { id: string } })
   const [newComment, setNewComment] = useState('');
   const [isInternal, setIsInternal] = useState(false);
 
-  useEffect(() => { loadTicket(); }, [id]);
+  useEffect(() => { loadTicket(true); }, [id]);
 
-  async function loadTicket() {
-    setLoading(true);
+  async function loadTicket(showSpinner = true) {
+    if (showSpinner) setLoading(true);
     try {
       const [ticketData, commentsData] = await Promise.all([
         ticketsApi.getById(id),
@@ -45,28 +45,46 @@ export default function TicketDetailPage({ params }: { params: { id: string } })
     } catch (err) {
       console.error(err);
     } finally {
-      setLoading(false);
+      if (showSpinner) setLoading(false);
     }
   }
 
   async function handleStatusChange(newStatus: string) {
+    const oldStatus = ticket.status;
+    setTicket({ ...ticket, status: newStatus }); // Optimistic update
     try {
       await ticketsApi.changeStatus(id, newStatus);
-      loadTicket();
+      loadTicket(false);
     } catch (err: any) {
+      setTicket({ ...ticket, status: oldStatus }); // Revert if failed
       alert(err.message);
     }
   }
 
   async function handleAddComment() {
     if (!newComment.trim()) return;
+    
+    const inputContent = newComment;
+    const inputInternal = isInternal;
+    
+    // Optimistic UI update
+    const tempComment = {
+      id: Math.random().toString(),
+      content: inputContent,
+      isInternal: inputInternal,
+      author: { name: user?.name || 'Eu' },
+      createdAt: new Date().toISOString()
+    };
+    setComments(prev => [tempComment, ...prev]);
+    setNewComment('');
+    setIsInternal(false);
+    
     try {
-      await ticketsApi.addComment(id, { content: newComment, isInternal });
-      setNewComment('');
-      setIsInternal(false);
-      loadTicket();
+      await ticketsApi.addComment(id, { content: inputContent, isInternal: inputInternal });
+      loadTicket(false);
     } catch (err: any) {
       alert(err.message);
+      loadTicket(false);
     }
   }
 
