@@ -30,7 +30,7 @@ export default function RegisterPage() {
         password: form.password,
       });
 
-      setAuthData(data.accessToken, data.refreshToken, data.user);
+      setAuthData(data.accessToken, data.user);
       router.push('/dashboard');
     } catch (err: any) {
       setError(err.message || 'Erro ao criar conta');
