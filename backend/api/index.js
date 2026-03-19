@@ -19,9 +19,9 @@ async function bootstrap() {
     );
     
     nestApp.enableCors({
-      origin: true, // Dynamically reflect the request origin (fixes Vercel CORS)
+      origin: '*', // Liberar acesso TOTAL agora
       methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-      credentials: true,
+      allowedHeaders: '*', // Aceitar qualquer cabeçalho
     });
     
     // Ensure Nest correctly identifies routes whether they come with the /api prefix or not
