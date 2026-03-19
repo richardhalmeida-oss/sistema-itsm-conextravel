@@ -61,6 +61,17 @@ export default function TicketDetailPage({ params }: { params: { id: string } })
     }
   }
 
+  async function handleDeleteTicket() {
+    if (!confirm('TEM CERTEZA? Esta ação apagará permanentemente o chamado e o histórico de conversas!')) return;
+    try {
+      await ticketsApi.delete(id);
+      // Volta para a listagem
+      router.push('/dashboard/tickets');
+    } catch (err: any) {
+      alert(err.message);
+    }
+  }
+
   async function handleAddComment() {
     if (!newComment.trim()) return;
     
@@ -134,6 +145,16 @@ export default function TicketDetailPage({ params }: { params: { id: string } })
                     {statusLabels[s]}
                   </button>
                 ))}
+                
+                {/* Delete Ticket (Admin Only) */}
+                {user?.roles?.includes('admin') && (
+                  <button
+                    onClick={handleDeleteTicket}
+                    style={{ marginLeft: 'auto', background: 'transparent', color: '#ef4444', border: '1px solid #ef4444', padding: '8px 16px', borderRadius: 8, cursor: 'pointer', fontWeight: 600 }}
+                  >
+                    🗑️ Apagar Chamado
+                  </button>
+                )}
               </div>
             </div>
           )}

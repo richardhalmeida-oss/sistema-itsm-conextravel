@@ -93,10 +93,18 @@ export default function DashboardPage() {
     }
   }
 
-  if (loading) {
+  if (!stats && loading) {
     return (
-      <div className="loading-spinner">
-        <div className="spinner" />
+      <div>
+        <div className="page-header">
+          <div>
+            <h2>Dashboard</h2>
+            <p className="page-subtitle">Sincronizando métricas estruturais...</p>
+          </div>
+        </div>
+        <div style={{ height: 300, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div className="spinner" />
+        </div>
       </div>
     );
   }

@@ -18,6 +18,7 @@ import { AutomationModule } from './modules/automation/automation.module';
 import { NotificationsModule } from './modules/notifications/notifications.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { HealthModule } from './modules/health/health.module';
+import { MailerModule } from './modules/mailer/mailer.module';
 
 @Module({
   imports: [
@@ -113,6 +114,7 @@ import { HealthModule } from './modules/health/health.module';
     NotificationsModule,
     DashboardModule,
     HealthModule,
+    MailerModule,
   ],
   providers: [
     {
